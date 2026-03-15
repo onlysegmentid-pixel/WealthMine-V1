@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="login.html" class="active">Login</a>
+        <a href="register.html">Start Mining</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="register.html" class="btn btn-primary">Create Account</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="container auth-wrap">
+      <div class="auth-card liquid-card">
+        <div class="auth-header">
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtext">
+            Login to access your dashboard, mining plans, machines,
+            deposit, withdraw and private portfolio area.
+          </p>
+        </div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary full">Login To Dashboard</button>
+
+          <div class="auth-bottom">
+            New here?
+            <a href="register.html">Create account</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="quick-panel">
+        <div class="quick-card liquid-card">
+          <h3>Inside Your Account</h3>
+          <p>
+            After login you will see your real wallet balance, active plans,
+            purchased machines, mining history and account actions.
+          </p>
+          <div class="quick-points">
+            <span>Dashboard Access</span>
+            <span>Machine Marketplace</span>
+            <span>Shared Plan Activation</span>
+            <span>Deposit & Withdrawal Control</span>
+          </div>
+        </div>
+
+        <div class="quick-card liquid-card">
+          <h3>Secure Access</h3>
+          <p>
+            Use your registered email and password to enter your private mining account area.
+          </p>
+        </div>
+
+        <div class="quick-card liquid-card">
+          <h3>New User Logic</h3>
+          <p>
+            Every new account starts from zero balance, zero machine and zero active plan.
+            You deposit first, then activate assets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Private client login for premium mining portfolio access.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

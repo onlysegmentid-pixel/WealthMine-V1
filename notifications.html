@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications | WealthMine</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="bg-orb orb-1"></div>
+
+<header class="navbar">
+<div class="container nav-inner">
+
+<a href="dashboard.html" class="brand">
+<div class="brand-badge">W</div>
+<div>Wealth<span>Mine</span></div>
+</a>
+
+<nav class="menu">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="machines.html">Machines</a>
+<a href="shared-plans.html">Plans</a>
+<a href="notifications.html" class="active">Notifications</a>
+<a href="my-profile.html">Profile</a>
+<a href="#" data-logout>Logout</a>
+
+</nav>
+
+</div>
+</header>
+
+<section class="section">
+<div class="container">
+
+<div class="page-banner">
+<h1>Notifications</h1>
+<p>Platform alerts and account updates.</p>
+</div>
+
+<div id="notificationList" class="info-grid">
+
+<div class="info-card">
+<h3>No Notifications</h3>
+<p>
+New deposits, purchases, plan activations and withdrawals will appear here.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<footer class="footer">
+<div class="container footer-inner">
+
+<div>
+<strong>WealthMine</strong>
+<p>Client notification center.</p>
+</div>
+
+<div>© 2026 WealthMine</div>
+
+</div>
+</footer>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("wm_registered_user") || "null");
+
+if(user){
+
+const notifications = user.notifications || [];
+
+const container = document.getElementById("notificationList");
+
+if(notifications.length){
+
+container.innerHTML = "";
+
+notifications.reverse().forEach(n=>{
+
+container.innerHTML += `
+
+<div class="info-card">
+
+<h3>${n.title}</h3>
+
+<p>${n.message}</p>
+
+<small class="text-muted">${n.date}</small>
+
+</div>
+
+`;
+
+});
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

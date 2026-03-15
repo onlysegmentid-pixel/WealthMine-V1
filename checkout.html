@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | WealthMine</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="bg-orb orb-1"></div>
+
+<header class="navbar">
+<div class="container nav-inner">
+
+<a href="dashboard.html" class="brand">
+<div class="brand-badge">W</div>
+<div>Wealth<span>Mine</span></div>
+</a>
+
+<nav class="menu">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="machines.html">Machines</a>
+<a href="shared-plans.html">Plans</a>
+<a href="deposit.html">Deposit</a>
+<a href="checkout.html" class="active">Checkout</a>
+<a href="my-profile.html">Profile</a>
+<a href="#" data-logout>Logout</a>
+
+</nav>
+
+</div>
+</header>
+
+<section class="section">
+<div class="container">
+
+<div class="page-banner">
+<h1>Checkout</h1>
+<p>Confirm your machine or mining plan purchase.</p>
+</div>
+
+<div class="finance-grid">
+
+<div class="finance-card">
+
+<h3>Purchase Info</h3>
+
+<div class="summary-line">
+<span>Product</span>
+<strong id="productName">-</strong>
+</div>
+
+<div class="summary-line">
+<span>Daily Profit</span>
+<strong id="productProfit">$0</strong>
+</div>
+
+<div class="summary-line">
+<span>Price</span>
+<strong id="productPrice">$0</strong>
+</div>
+
+<button onclick="confirmPurchase()" class="btn btn-primary full">
+Confirm Purchase
+</button>
+
+</div>
+
+<div class="finance-card">
+
+<h3>Your Wallet</h3>
+
+<div class="summary-line">
+<span>Balance</span>
+<strong id="walletBalance">$0</strong>
+</div>
+
+<div class="wallet-box">
+Purchase will deduct balance from your wallet.
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<script src="script.js"></script>
+
+<script>
+
+function formatMoney(v){
+return "$"+Number(v||0).toLocaleString(undefined,{minimumFractionDigits:2});
+}
+
+const user = JSON.parse(localStorage.getItem("wm_registered_user"));
+
+document.getElementById("walletBalance").innerText = formatMoney(user.balance);
+
+const product = JSON.parse(localStorage.getItem("wm_checkout"));
+
+if(product){
+
+document.getElementById("productName").innerText = product.name;
+document.getElementById("productPrice").innerText = formatMoney(product.price);
+document.getElementById("productProfit").innerText = formatMoney(product.profit);
+
+}
+
+function confirmPurchase(){
+
+if(user.balance < product.price){
+alert("Not enough balance");
+return;
+}
+
+user.balance -= product.price;
+
+user.machines.push(product);
+
+if(!user.transactions) user.transactions=[];
+
+user.transactions.push({
+id:"TX-"+Date.now(),
+type:"Purchase",
+desc:product.name,
+amount:product.price,
+date:new Date().toISOString().slice(0,10),
+status:"Completed"
+});
+
+localStorage.setItem("wm_registered_user",JSON.stringify(user));
+
+alert("Machine activated");
+
+window.location.href="my-machines.html";
+
+}
+
+</script>
+
+</body>
+</html>

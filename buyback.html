@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Buyback | WealthMine</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+<div class="container nav-inner">
+
+<a href="dashboard.html" class="brand">
+<div class="brand-badge">W</div>
+<div>Wealth<span>Mine</span></div>
+</a>
+
+<nav class="menu">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="my-machines.html">My Machines</a>
+<a href="buyback.html" class="active">Buyback</a>
+<a href="my-profile.html">Profile</a>
+<a href="#" data-logout>Logout</a>
+
+</nav>
+
+</div>
+</header>
+
+<section class="section">
+<div class="container">
+
+<div class="page-banner">
+<h1>Machine Buyback</h1>
+<p>Sell your machine back to the company.</p>
+</div>
+
+<div class="finance-card">
+
+<h3>Select Machine</h3>
+
+<select id="machineSelect"></select>
+
+<button onclick="sellMachine()" class="btn btn-primary full">
+Request Buyback
+</button>
+
+</div>
+
+</div>
+</section>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("wm_registered_user"));
+
+const select = document.getElementById("machineSelect");
+
+(user.machines || []).forEach((m,i)=>{
+
+select.innerHTML += `<option value="${i}">${m.name}</option>`;
+
+});
+
+function sellMachine(){
+
+const index = select.value;
+
+const machine = user.machines[index];
+
+const value = machine.price * 0.85;
+
+user.balance += value;
+
+user.machines.splice(index,1);
+
+if(!user.transactions) user.transactions=[];
+
+user.transactions.push({
+id:"TX-"+Date.now(),
+type:"Buyback",
+desc:machine.name,
+amount:value,
+date:new Date().toISOString().slice(0,10),
+status:"Completed"
+});
+
+localStorage.setItem("wm_registered_user",JSON.stringify(user));
+
+alert("Machine sold successfully");
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>

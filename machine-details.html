@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machine Details | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="machines.html" class="active">Machines</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="support.html">Support</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="checkout.html" class="btn btn-primary">Checkout</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>Machine Details</h1>
+        <p>
+          Review premium machine specifications, performance profile, buyback structure and daily output visibility.
+        </p>
+      </div>
+
+      <div class="finance-grid">
+        <div class="finance-card">
+          <div class="product-visual" style="height:260px;">
+            <div class="machine-shell">
+              <span class="fan fan-left"></span>
+              <span class="fan fan-right"></span>
+            </div>
+          </div>
+
+          <div class="tag tag-blue" style="margin-bottom:14px;">Flagship BTC Unit</div>
+          <h3 style="font-size:30px; margin-bottom:10px;">WM HydroMax X120</h3>
+          <p style="color:#9fb0c7; line-height:1.85;">
+            A premium hydro-cooled BTC mining machine designed for elegant industrial ownership,
+            high-output deployment and long-term portfolio positioning.
+          </p>
+        </div>
+
+        <div class="finance-card">
+          <h3>Machine Profile</h3>
+
+          <div class="summary-line">
+            <span>Machine Price</span>
+            <strong>$5,950</strong>
+          </div>
+          <div class="summary-line">
+            <span>Estimated 24h Profit</span>
+            <strong class="text-success">$36.40</strong>
+          </div>
+          <div class="summary-line">
+            <span>Hashrate</span>
+            <strong>198 TH/s</strong>
+          </div>
+          <div class="summary-line">
+            <span>Cooling Type</span>
+            <strong>Hydro Cooling</strong>
+          </div>
+          <div class="summary-line">
+            <span>Ownership Model</span>
+            <strong>Permanent</strong>
+          </div>
+          <div class="summary-line">
+            <span>Buyback Value</span>
+            <strong>$5,650</strong>
+          </div>
+
+          <div class="wallet-box">
+            Owners can later request company buyback for this machine at a reduced valuation,
+            depending on current machine class and internal pricing policy.
+          </div>
+
+          <div style="height:16px;"></div>
+
+          <button class="btn btn-primary full"
+            onclick="selectMachine('WM HydroMax X120', 5950, '198 TH/s', 36.4, 5650)">
+            Buy This Machine
+          </button>
+        </div>
+      </div>
+
+      <div class="premium-grid three" style="margin-top:22px;">
+        <div class="glass-card feature-card">
+          <h3>Performance Class</h3>
+          <p>Built for higher-tier BTC output with stable premium industrial positioning.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <h3>Infrastructure Fit</h3>
+          <p>Ideal for hosted industrial layouts with cooling visibility and uptime control.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <h3>Portfolio Role</h3>
+          <p>Best suited for users wanting stronger daily yield and higher-value asset exposure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium hardware detail layer for luxury mining portfolios.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

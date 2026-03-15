@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contract Details | WealthMine</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+<div class="container nav-inner">
+
+<a href="dashboard.html" class="brand">
+<div class="brand-badge">W</div>
+<div>Wealth<span>Mine</span></div>
+</a>
+
+<nav class="menu">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="shared-plans.html">Plans</a>
+<a href="contract-details.html" class="active">Contract</a>
+<a href="my-profile.html">Profile</a>
+<a href="#" data-logout>Logout</a>
+
+</nav>
+
+</div>
+</header>
+
+<section class="section">
+<div class="container">
+
+<div class="page-banner">
+<h1>Contract Details</h1>
+<p>Your active mining plan agreement.</p>
+</div>
+
+<div class="finance-card">
+
+<div class="summary-line">
+<span>Plan</span>
+<strong id="planName">-</strong>
+</div>
+
+<div class="summary-line">
+<span>Capital</span>
+<strong id="planCapital">$0</strong>
+</div>
+
+<div class="summary-line">
+<span>Daily Profit</span>
+<strong id="planProfit">$0</strong>
+</div>
+
+<div class="summary-line">
+<span>Status</span>
+<strong class="text-success">Active</strong>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<script>
+
+function formatMoney(v){
+return "$"+Number(v).toLocaleString(undefined,{minimumFractionDigits:2});
+}
+
+const user = JSON.parse(localStorage.getItem("wm_registered_user"));
+
+if(user.activePlans && user.activePlans.length){
+
+const p = user.activePlans[0];
+
+document.getElementById("planName").innerText = p.name;
+document.getElementById("planCapital").innerText = formatMoney(p.price);
+document.getElementById("planProfit").innerText = formatMoney(p.dailyProfit);
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machines | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html" class="active">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="support.html">Support</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="deposit.html" class="btn btn-primary">Add Balance</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>Mining Marketplace</h1>
+        <p>
+          Buy industrial mining hardware and activate real portfolio assets from your private account area.
+        </p>
+      </div>
+
+      <div class="balance-strip">
+        <div class="balance-card">
+          <span>Available Balance</span>
+          <strong id="machinesBalance">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total Machines</span>
+          <strong id="machinesOwnedCount">00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Daily Machine Profit</span>
+          <strong id="machinesDailyProfit">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total Machine Value</span>
+          <strong id="machinesPortfolioValue">$0.00</strong>
+        </div>
+      </div>
+
+      <div class="section-head center">
+        <h2>Ownership Machines</h2>
+        <p>
+          Buy industrial hardware as permanent portfolio assets with realistic daily yield and structured buyback support.
+        </p>
+      </div>
+
+      <div class="premium-grid three">
+
+        <div class="glass-card product-card">
+          <div class="product-top">
+            <span class="tag tag-gold">Entry BTC Unit</span>
+            <span class="profit-pill">24h Profit $19.80</span>
+          </div>
+
+          <div class="product-visual">
+            <div class="machine-shell">
+              <span class="fan fan-left"></span>
+              <span class="fan fan-right"></span>
+            </div>
+          </div>
+
+          <h3>WM AsicCore S19</h3>
+          <p class="product-text">Reliable BTC ASIC hardware for elegant entry-level ownership.</p>
+
+          <div class="detail-list">
+            <div><span>Price</span><strong>$2,850</strong></div>
+            <div><span>Hashrate</span><strong>110 TH/s</strong></div>
+            <div><span>Buyback</span><strong>$2,650</strong></div>
+            <div><span>Ownership</span><strong>Permanent</strong></div>
+          </div>
+
+          <div class="note-box">
+            Owners can later resell through the company buyback channel.
+          </div>
+
+          <button class="btn btn-primary full"
+            onclick="selectMachine('WM AsicCore S19', 2850, '110 TH/s', 19.8, 2650)">
+            Buy Machine
+          </button>
+        </div>
+
+        <div class="glass-card product-card featured-card">
+          <div class="product-top">
+            <span class="tag tag-blue">Flagship BTC Unit</span>
+            <span class="profit-pill">24h Profit $36.40</span>
+          </div>
+
+          <div class="product-visual">
+            <div class="machine-shell">
+              <span class="fan fan-left"></span>
+              <span class="fan fan-right"></span>
+            </div>
+          </div>
+
+          <h3>WM HydroMax X120</h3>
+          <p class="product-text">Premium hydro-cooled BTC miner for higher-end ownership growth.</p>
+
+          <div class="detail-list">
+            <div><span>Price</span><strong>$5,950</strong></div>
+            <div><span>Hashrate</span><strong>198 TH/s</strong></div>
+            <div><span>Buyback</span><strong>$5,650</strong></div>
+            <div><span>Ownership</span><strong>Permanent</strong></div>
+          </div>
+
+          <div class="note-box">
+            High-end industrial machine with resale support to company desk.
+          </div>
+
+          <button class="btn btn-primary full"
+            onclick="selectMachine('WM HydroMax X120', 5950, '198 TH/s', 36.4, 5650)">
+            Buy Machine
+          </button>
+        </div>
+
+        <div class="glass-card product-card">
+          <div class="product-top">
+            <span class="tag tag-violet">GPU Rack Unit</span>
+            <span class="profit-pill">24h Profit $27.60</span>
+          </div>
+
+          <div class="product-visual">
+            <div class="machine-shell">
+              <span class="fan fan-left"></span>
+              <span class="fan fan-right"></span>
+            </div>
+          </div>
+
+          <h3>WM EtherRack Pro 8</h3>
+          <p class="product-text">Premium GPU rack model with elegant performance visibility.</p>
+
+          <div class="detail-list">
+            <div><span>Price</span><strong>$4,480</strong></div>
+            <div><span>Performance</span><strong>820 MH/s</strong></div>
+            <div><span>Buyback</span><strong>$4,230</strong></div>
+            <div><span>Ownership</span><strong>Permanent</strong></div>
+          </div>
+
+          <div class="note-box">
+            Refined rack-style mining ownership with buyback route.
+          </div>
+
+          <button class="btn btn-primary full"
+            onclick="selectMachine('WM EtherRack Pro 8', 4480, '820 MH/s', 27.6, 4230)">
+            Buy Machine
+          </button>
+        </div>
+
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>My Purchased Machines</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="machine-table">
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Hashrate / Performance</th>
+                <th>Buy Price</th>
+                <th>24h Profit</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="ownedMachinesTable">
+              <tr>
+                <td colspan="5" class="text-muted center">No machine purchased yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Purchase Flow</h3>
+          <p>
+            If your balance is enough, machine purchase will activate instantly and appear in dashboard,
+            machine history and portfolio data.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Balance Rule</h3>
+          <p>
+            New users start with zero balance. Deposit funds first, then buy any machine you want from this marketplace.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Luxury mining marketplace with refined ownership and contract models.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatMoney(amount) {
+      const num = Number(amount || 0);
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = JSON.parse(localStorage.getItem("wm_registered_user") || "null");
+      if (!user) return;
+
+      const machines = Array.isArray(user.machines) ? user.machines : [];
+      const balance = Number(user.balance || 0);
+      const dailyProfit = machines.reduce(function (sum, item) {
+        return sum + Number(item.dailyProfit || 0);
+      }, 0);
+      const portfolioValue = machines.reduce(function (sum, item) {
+        return sum + Number(item.price || 0);
+      }, 0);
+
+      const balanceEl = document.getElementById("machinesBalance");
+      const countEl = document.getElementById("machinesOwnedCount");
+      const profitEl = document.getElementById("machinesDailyProfit");
+      const valueEl = document.getElementById("machinesPortfolioValue");
+      const tableEl = document.getElementById("ownedMachinesTable");
+
+      if (balanceEl) balanceEl.textContent = formatMoney(balance);
+      if (countEl) countEl.textContent = String(machines.length).padStart(2, "0");
+      if (profitEl) profitEl.textContent = formatMoney(dailyProfit);
+      if (valueEl) valueEl.textContent = formatMoney(portfolioValue);
+
+      if (tableEl) {
+        if (!machines.length) {
+          tableEl.innerHTML = `
+            <tr>
+              <td colspan="5" class="text-muted center">No machine purchased yet.</td>
+            </tr>
+          `;
+        } else {
+          tableEl.innerHTML = machines.map(function (item) {
+            return `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.hashrate}</td>
+                <td>${formatMoney(item.price)}</td>
+                <td>${formatMoney(item.dailyProfit)}</td>
+                <td class="status-online">${item.status || "Online"}</td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    });
+  </script>
+</body>
+</html>

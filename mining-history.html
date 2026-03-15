@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mining History | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="my-machines.html">My Machines</a>
+        <a href="mining-history.html" class="active">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-primary">Dashboard</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>Mining History</h1>
+        <p>
+          Review credited machine output, shared contract yield and activity history
+          generated from your real account actions.
+        </p>
+      </div>
+
+      <div class="balance-strip">
+        <div class="balance-card">
+          <span>Total Recorded Items</span>
+          <strong id="historyRecordCount">00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total Mining Yield</span>
+          <strong id="historyTotalYield">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Best 24h Output</span>
+          <strong id="historyBestYield">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Last Credit Date</span>
+          <strong id="historyLastDate">-</strong>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>Daily Mining Records</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="machine-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Source</th>
+                <th>Output Type</th>
+                <th>Yield</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="miningHistoryTable">
+              <tr>
+                <td colspan="5" class="text-muted center">No mining history yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Machine Yield Records</h3>
+          <p>
+            Hardware purchase events and machine-based daily output appear here
+            once you activate mining machines from the marketplace.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Contract Yield Records</h3>
+          <p>
+            Shared plan activations are also added here, so both machines and plans
+            remain visible in one unified mining history view.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium mining activity history with live yield visibility.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatMoney(amount) {
+      const num = Number(amount || 0);
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = JSON.parse(localStorage.getItem("wm_registered_user") || "null");
+      if (!user) return;
+
+      const history = Array.isArray(user.miningHistory) ? user.miningHistory : [];
+
+      const totalYield = history.reduce(function (sum, item) {
+        return sum + Number(item.yield || 0);
+      }, 0);
+
+      const bestYield = history.reduce(function (max, item) {
+        return Math.max(max, Number(item.yield || 0));
+      }, 0);
+
+      const lastDate = history.length ? history[0].date : "-";
+
+      const countEl = document.getElementById("historyRecordCount");
+      const totalYieldEl = document.getElementById("historyTotalYield");
+      const bestYieldEl = document.getElementById("historyBestYield");
+      const lastDateEl = document.getElementById("historyLastDate");
+      const tableEl = document.getElementById("miningHistoryTable");
+
+      if (countEl) countEl.textContent = String(history.length).padStart(2, "0");
+      if (totalYieldEl) totalYieldEl.textContent = formatMoney(totalYield);
+      if (bestYieldEl) bestYieldEl.textContent = formatMoney(bestYield);
+      if (lastDateEl) lastDateEl.textContent = lastDate;
+
+      if (tableEl) {
+        if (!history.length) {
+          tableEl.innerHTML = `
+            <tr>
+              <td colspan="5" class="text-muted center">No mining history yet.</td>
+            </tr>
+          `;
+        } else {
+          tableEl.innerHTML = history.map(function (item) {
+            const statusClass =
+              (item.status || "").toLowerCase() === "active" ||
+              (item.status || "").toLowerCase() === "credited"
+                ? "status-online"
+                : "status-maintenance";
+
+            return `
+              <tr>
+                <td>${item.date}</td>
+                <td>${item.source}</td>
+                <td>${item.outputType}</td>
+                <td>${formatMoney(item.yield)}</td>
+                <td class="${statusClass}">${item.status}</td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    });
+  </script>
+</body>
+</html>

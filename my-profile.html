@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="my-machines.html">My Machines</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html" class="active">Profile</a>
+        <a href="support.html">Support</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="settings.html" class="btn btn-primary">Settings</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>My Profile</h1>
+        <p>
+          Manage your client identity, wallet preference, account information
+          and private WealthMine environment settings.
+        </p>
+      </div>
+
+      <div class="premium-grid three">
+        <a href="settings.html" class="glass-card feature-card">
+          <h3>Settings</h3>
+          <p>Adjust alerts, preferences and account environment.</p>
+        </a>
+
+        <a href="deposit.html" class="glass-card feature-card">
+          <h3>Deposit</h3>
+          <p>Add funds to your wallet balance for plans and machine purchases.</p>
+        </a>
+
+        <a href="support.html" class="glass-card feature-card">
+          <h3>Support</h3>
+          <p>Get help for deposits, withdrawals, plans and account issues.</p>
+        </a>
+      </div>
+
+      <div class="finance-grid" style="margin-top:22px;">
+        <div class="finance-card">
+          <h3>Account Overview</h3>
+
+          <div class="summary-line">
+            <span>Client Name</span>
+            <strong id="profileClientName">-</strong>
+          </div>
+          <div class="summary-line">
+            <span>Client ID</span>
+            <strong id="profileClientId">-</strong>
+          </div>
+          <div class="summary-line">
+            <span>Email</span>
+            <strong id="profileEmail">-</strong>
+          </div>
+          <div class="summary-line">
+            <span>Verification</span>
+            <strong class="text-success">Verified</strong>
+          </div>
+          <div class="summary-line">
+            <span>Total Machines</span>
+            <strong id="profileMachines">00</strong>
+          </div>
+          <div class="summary-line">
+            <span>Shared Plans</span>
+            <strong id="profilePlans">00</strong>
+          </div>
+          <div class="summary-line">
+            <span>Wallet Balance</span>
+            <strong id="profileBalance">$0.00</strong>
+          </div>
+          <div class="summary-line">
+            <span>Total Deposited</span>
+            <strong id="profileDeposited">$0.00</strong>
+          </div>
+        </div>
+
+        <div class="finance-card">
+          <h3>Edit Profile</h3>
+
+          <form id="profileForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="profileFirstName">First Name</label>
+                <input type="text" id="profileFirstName" placeholder="Enter first name" />
+              </div>
+              <div class="form-group">
+                <label for="profileLastName">Last Name</label>
+                <input type="text" id="profileLastName" placeholder="Enter last name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="profileEmailInput">Email Address</label>
+              <input type="email" id="profileEmailInput" placeholder="Enter email address" />
+            </div>
+
+            <div class="form-group">
+              <label for="profilePhone">Phone Number</label>
+              <input type="text" id="profilePhone" placeholder="Add phone number" />
+            </div>
+
+            <div class="form-group">
+              <label for="profileWallet">Main Wallet Address</label>
+              <input type="text" id="profileWallet" placeholder="Enter preferred wallet address" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Account Logic</h3>
+          <p>
+            Your profile details stay connected to the same local account data,
+            so updates remain visible across your private area pages.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Portfolio Identity</h3>
+          <p>
+            Machines, plans, deposits and withdrawals are linked to your client profile
+            and displayed from the currently logged in account.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Luxury identity and settings center for private mining clients.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatMoney(amount) {
+      const num = Number(amount || 0);
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function buildDisplayName(user) {
+      const firstName = (user.firstName || "").trim();
+      const lastName = (user.lastName || "").trim();
+
+      if (firstName || lastName) {
+        return (firstName + " " + lastName).trim();
+      }
+
+      return user.username || "Client";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const raw = localStorage.getItem("wm_registered_user");
+      if (!raw) return;
+
+      const user = JSON.parse(raw);
+
+      const machines = Array.isArray(user.machines) ? user.machines : [];
+      const plans = Array.isArray(user.activePlans) ? user.activePlans : [];
+
+      const clientNameEl = document.getElementById("profileClientName");
+      const clientIdEl = document.getElementById("profileClientId");
+      const emailEl = document.getElementById("profileEmail");
+      const machinesEl = document.getElementById("profileMachines");
+      const plansEl = document.getElementById("profilePlans");
+      const balanceEl = document.getElementById("profileBalance");
+      const depositedEl = document.getElementById("profileDeposited");
+
+      const firstNameInput = document.getElementById("profileFirstName");
+      const lastNameInput = document.getElementById("profileLastName");
+      const emailInput = document.getElementById("profileEmailInput");
+      const phoneInput = document.getElementById("profilePhone");
+      const walletInput = document.getElementById("profileWallet");
+      const profileForm = document.getElementById("profileForm");
+
+      if (clientNameEl) clientNameEl.textContent = buildDisplayName(user);
+      if (clientIdEl) clientIdEl.textContent = user.userId || "-";
+      if (emailEl) emailEl.textContent = user.email || "-";
+      if (machinesEl) machinesEl.textContent = String(machines.length).padStart(2, "0");
+      if (plansEl) plansEl.textContent = String(plans.length).padStart(2, "0");
+      if (balanceEl) balanceEl.textContent = formatMoney(user.balance || 0);
+      if (depositedEl) depositedEl.textContent = formatMoney(user.totalDeposited || 0);
+
+      if (firstNameInput) firstNameInput.value = user.firstName || "";
+      if (lastNameInput) lastNameInput.value = user.lastName || "";
+      if (emailInput) emailInput.value = user.email || "";
+      if (phoneInput) phoneInput.value = user.phone || "";
+      if (walletInput) walletInput.value = user.walletAddress || "";
+
+      if (profileForm) {
+        profileForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          user.firstName = firstNameInput ? firstNameInput.value.trim() : "";
+          user.lastName = lastNameInput ? lastNameInput.value.trim() : "";
+          user.email = emailInput ? emailInput.value.trim() : user.email;
+          user.phone = phoneInput ? phoneInput.value.trim() : "";
+          user.walletAddress = walletInput ? walletInput.value.trim() : "";
+
+          localStorage.setItem("wm_registered_user", JSON.stringify(user));
+
+          if (localStorage.getItem("wm_logged_in") === "true") {
+            localStorage.setItem("wm_user", JSON.stringify(user));
+          }
+
+          alert("Profile updated successfully.");
+          window.location.reload();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

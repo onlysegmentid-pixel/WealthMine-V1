@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Machines | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="my-machines.html" class="active">My Machines</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="machines.html" class="btn btn-primary">Buy Machine</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="page-banner">
+        <h1>My Mining Machines</h1>
+        <p>
+          Review all purchased mining hardware, daily output, buyback value
+          and live ownership status from your private machine portfolio.
+        </p>
+      </div>
+
+      <div class="balance-strip">
+        <div class="balance-card">
+          <span>Total Machines</span>
+          <strong id="myMachineCount">00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total Machine Value</span>
+          <strong id="myMachineValue">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Daily Machine Profit</span>
+          <strong id="myMachineProfit" class="text-success">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Buyback Value</span>
+          <strong id="myMachineBuyback">$0.00</strong>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>Owned Machine List</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="machine-table">
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Hashrate / Performance</th>
+                <th>Buy Price</th>
+                <th>24h Profit</th>
+                <th>Buyback</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="myMachinesTable">
+              <tr>
+                <td colspan="6" class="text-muted center">No machine purchased yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Ownership Status</h3>
+          <p>
+            Every machine you purchase from the marketplace is saved into your account
+            and becomes visible here automatically.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Machine Portfolio Logic</h3>
+          <p>
+            New account starts empty. After deposit and purchase, machine value,
+            daily output and buyback totals update instantly.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium hardware ownership view for your mining machine portfolio.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatMoney(amount) {
+      const num = Number(amount || 0);
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = JSON.parse(localStorage.getItem("wm_registered_user") || "null");
+      if (!user) return;
+
+      const machines = Array.isArray(user.machines) ? user.machines : [];
+
+      const totalValue = machines.reduce(function (sum, item) {
+        return sum + Number(item.price || 0);
+      }, 0);
+
+      const totalProfit = machines.reduce(function (sum, item) {
+        return sum + Number(item.dailyProfit || 0);
+      }, 0);
+
+      const totalBuyback = machines.reduce(function (sum, item) {
+        return sum + Number(item.buyback || 0);
+      }, 0);
+
+      const countEl = document.getElementById("myMachineCount");
+      const valueEl = document.getElementById("myMachineValue");
+      const profitEl = document.getElementById("myMachineProfit");
+      const buybackEl = document.getElementById("myMachineBuyback");
+      const tableEl = document.getElementById("myMachinesTable");
+
+      if (countEl) countEl.textContent = String(machines.length).padStart(2, "0");
+      if (valueEl) valueEl.textContent = formatMoney(totalValue);
+      if (profitEl) profitEl.textContent = formatMoney(totalProfit);
+      if (buybackEl) buybackEl.textContent = formatMoney(totalBuyback);
+
+      if (tableEl) {
+        if (!machines.length) {
+          tableEl.innerHTML = `
+            <tr>
+              <td colspan="6" class="text-muted center">No machine purchased yet.</td>
+            </tr>
+          `;
+        } else {
+          tableEl.innerHTML = machines.map(function (item) {
+            return `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.hashrate}</td>
+                <td>${formatMoney(item.price)}</td>
+                <td>${formatMoney(item.dailyProfit)}</td>
+                <td>${formatMoney(item.buyback)}</td>
+                <td class="status-online">${item.status || "Online"}</td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    });
+  </script>
+</body>
+</html>

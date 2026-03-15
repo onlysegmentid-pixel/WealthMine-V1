@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="my-machines.html">My Machines</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="settings.html" class="active">Settings</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="my-profile.html" class="btn btn-primary">Profile</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>Settings</h1>
+        <p>
+          Configure your personal account preferences, alert options,
+          wallet defaults and private environment settings.
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Notifications</h3>
+          <div class="summary-line">
+            <span>Email Alerts</span>
+            <strong id="settingsEmailAlerts">Enabled</strong>
+          </div>
+          <div class="summary-line">
+            <span>Deposit Updates</span>
+            <strong id="settingsDepositAlerts">Enabled</strong>
+          </div>
+          <div class="summary-line">
+            <span>Withdrawal Alerts</span>
+            <strong id="settingsWithdrawalAlerts">Enabled</strong>
+          </div>
+          <div class="summary-line">
+            <span>Plan Alerts</span>
+            <strong id="settingsPlanAlerts">Enabled</strong>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Security & Wallet</h3>
+          <div class="summary-line">
+            <span>2FA</span>
+            <strong id="settings2fa">Not Connected</strong>
+          </div>
+          <div class="summary-line">
+            <span>Withdrawal PIN</span>
+            <strong id="settingsPin">Active</strong>
+          </div>
+          <div class="summary-line">
+            <span>Main Wallet</span>
+            <strong id="settingsWalletStatus">Not Configured</strong>
+          </div>
+          <div class="summary-line">
+            <span>Session Review</span>
+            <strong>Available</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="finance-card" style="margin-top:22px;">
+        <h3>Update Preferences</h3>
+
+        <form id="settingsForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="settingsLanguage">Language</label>
+              <select id="settingsLanguage">
+                <option value="English">English</option>
+                <option value="Bangla">Bangla</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="settingsCurrency">Primary Currency</label>
+              <select id="settingsCurrency">
+                <option value="USD">USD</option>
+                <option value="USDT">USDT</option>
+                <option value="BTC">BTC</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="settingsNotificationEmail">Notification Email</label>
+            <input type="email" id="settingsNotificationEmail" placeholder="Enter notification email" />
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="settingsEmailAlertToggle">Email Alerts</label>
+              <select id="settingsEmailAlertToggle">
+                <option value="Enabled">Enabled</option>
+                <option value="Disabled">Disabled</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="settingsTwoFactor">2FA Status</label>
+              <select id="settingsTwoFactor">
+                <option value="Not Connected">Not Connected</option>
+                <option value="Connected">Connected</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save Settings</button>
+        </form>
+      </div>
+
+      <div class="info-grid" style="margin-top:22px;">
+        <div class="info-card">
+          <h3>Personalization</h3>
+          <p>
+            Your selected language, currency and notification email are stored
+            with your current account and reused inside your private area.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Wallet Sync</h3>
+          <p>
+            If you add a wallet address from your profile page, wallet status here
+            updates automatically to reflect the saved account info.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium environment settings for mining account personalization.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const raw = localStorage.getItem("wm_registered_user");
+      if (!raw) return;
+
+      const user = JSON.parse(raw);
+
+      if (!user.settings) {
+        user.settings = {
+          language: "English",
+          currency: "USD",
+          notificationEmail: user.email || "",
+          emailAlerts: "Enabled",
+          twoFactor: "Not Connected"
+        };
+        localStorage.setItem("wm_registered_user", JSON.stringify(user));
+      }
+
+      const settings = user.settings || {};
+
+      const languageInput = document.getElementById("settingsLanguage");
+      const currencyInput = document.getElementById("settingsCurrency");
+      const emailInput = document.getElementById("settingsNotificationEmail");
+      const emailAlertInput = document.getElementById("settingsEmailAlertToggle");
+      const twoFactorInput = document.getElementById("settingsTwoFactor");
+      const form = document.getElementById("settingsForm");
+
+      const emailAlertsText = document.getElementById("settingsEmailAlerts");
+      const depositAlertsText = document.getElementById("settingsDepositAlerts");
+      const withdrawalAlertsText = document.getElementById("settingsWithdrawalAlerts");
+      const planAlertsText = document.getElementById("settingsPlanAlerts");
+      const twoFaText = document.getElementById("settings2fa");
+      const pinText = document.getElementById("settingsPin");
+      const walletStatusText = document.getElementById("settingsWalletStatus");
+
+      if (languageInput) languageInput.value = settings.language || "English";
+      if (currencyInput) currencyInput.value = settings.currency || "USD";
+      if (emailInput) emailInput.value = settings.notificationEmail || user.email || "";
+      if (emailAlertInput) emailAlertInput.value = settings.emailAlerts || "Enabled";
+      if (twoFactorInput) twoFactorInput.value = settings.twoFactor || "Not Connected";
+
+      if (emailAlertsText) emailAlertsText.textContent = settings.emailAlerts || "Enabled";
+      if (depositAlertsText) depositAlertsText.textContent = settings.emailAlerts || "Enabled";
+      if (withdrawalAlertsText) withdrawalAlertsText.textContent = settings.emailAlerts || "Enabled";
+      if (planAlertsText) planAlertsText.textContent = settings.emailAlerts || "Enabled";
+      if (twoFaText) twoFaText.textContent = settings.twoFactor || "Not Connected";
+      if (pinText) pinText.textContent = "Active";
+      if (walletStatusText) {
+        walletStatusText.textContent = user.walletAddress ? "Configured" : "Not Configured";
+      }
+
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          user.settings = {
+            language: languageInput ? languageInput.value : "English",
+            currency: currencyInput ? currencyInput.value : "USD",
+            notificationEmail: emailInput ? emailInput.value.trim() : (user.email || ""),
+            emailAlerts: emailAlertInput ? emailAlertInput.value : "Enabled",
+            twoFactor: twoFactorInput ? twoFactorInput.value : "Not Connected"
+          };
+
+          localStorage.setItem("wm_registered_user", JSON.stringify(user));
+
+          if (localStorage.getItem("wm_logged_in") === "true") {
+            localStorage.setItem("wm_user", JSON.stringify(user));
+          }
+
+          alert("Settings updated successfully.");
+          window.location.reload();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

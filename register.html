@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start Mining | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html" class="active">Start Mining</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline">Login</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="container auth-wrap">
+      <div class="auth-card liquid-card">
+        <div class="auth-header">
+          <h1 class="auth-title">Create Your Mining Account</h1>
+          <p class="auth-subtext">
+            Start with a secure private account and unlock dashboard, machines,
+            shared plans, deposit, withdraw and your portfolio tools.
+          </p>
+        </div>
+
+        <form id="registerForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="regUsername">Username</label>
+              <input
+                type="text"
+                id="regUsername"
+                placeholder="Choose a username"
+                autocomplete="username"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="regEmail">Email</label>
+              <input
+                type="email"
+                id="regEmail"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="regPassword">Password</label>
+              <input
+                type="password"
+                id="regPassword"
+                placeholder="Create password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="regConfirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="regConfirmPassword"
+                placeholder="Confirm password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="termsCheck" required />
+            <label for="termsCheck">
+              I agree to the Terms & Conditions and understand the platform account rules.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary full">Create Account</button>
+
+          <div class="auth-bottom">
+            Already have an account?
+            <a href="login.html">Login now</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="quick-panel">
+        <div class="quick-card liquid-card">
+          <h3>What You Unlock After Registration</h3>
+          <p>
+            Your private account area will show dashboard, machines, shared plans,
+            deposit, withdraw, profile and mining history.
+          </p>
+          <div class="quick-points">
+            <span>Access Private Dashboard</span>
+            <span>Join Shared Mining Plans</span>
+            <span>Buy Mining Machines</span>
+            <span>Manage Balance & Transactions</span>
+          </div>
+        </div>
+
+        <div class="quick-card liquid-card">
+          <h3>New Account Starts From Zero</h3>
+          <p>
+            Every newly created user receives $0.00 balance, zero active plan,
+            zero machines and zero mining history by default.
+          </p>
+        </div>
+
+        <div class="quick-card liquid-card">
+          <h3>How It Works</h3>
+          <p>
+            Create account → login → deposit funds → activate machine or plan →
+            monitor everything from dashboard.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Create your private mining account and unlock the full platform experience.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

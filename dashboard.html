@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="support.html">Support</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="machines.html" class="btn btn-primary">Add Asset</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="page-banner">
+        <h1><span id="dashboardUsername">Client</span>'s Mining Dashboard</h1>
+        <p>
+          Track machine assets, shared plans, balance, daily yield, mining history
+          and overall portfolio performance from your private client area.
+        </p>
+      </div>
+
+      <div class="balance-strip">
+        <div class="balance-card">
+          <span>Total Portfolio</span>
+          <strong id="totalPortfolio">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Available Balance</span>
+          <strong id="availableBalance">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>24h Mining Profit</span>
+          <strong id="profit24h" class="text-success">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total BTC Earned</span>
+          <strong id="totalBTCEarned">0.000000 BTC</strong>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="chart-container">
+          <div class="card-head">
+            <h3>Mining Profit Trend</h3>
+          </div>
+          <canvas id="profitChart"></canvas>
+        </div>
+
+        <div class="price-widget">
+          <div class="widget-top">
+            <h3>Account Snapshot</h3>
+            <span class="tag tag-gold">Private Area</span>
+          </div>
+
+          <div class="market-price" id="machineCount">00</div>
+          <div class="market-change text-success">Active Machines</div>
+
+          <div class="mini-stat-group">
+            <div class="mini-stat">
+              <span>Active Plans</span>
+              <strong id="planCount">00</strong>
+              <div class="progress">
+                <div class="progress-bar" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="mini-stat">
+              <span>Mining History Records</span>
+              <strong id="historyCount">00</strong>
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+            </div>
+
+            <div class="mini-stat">
+              <span>Pool Uptime</span>
+              <strong>99.9%</strong>
+              <div class="progress">
+                <div class="progress-bar" style="width: 99%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="premium-grid three" style="margin-top:24px;">
+        <a href="my-machines.html" class="glass-card feature-card">
+          <div class="icon-chip">◈</div>
+          <h3>My Machines</h3>
+          <p>Review your purchased machines, hashrate, status and daily profit.</p>
+          <div class="big-value" id="summaryMachines">0</div>
+        </a>
+
+        <a href="mining-history.html" class="glass-card feature-card">
+          <div class="icon-chip">✦</div>
+          <h3>Mining History</h3>
+          <p>Check credited machine and contract history across your account.</p>
+          <div class="big-value" id="historyCountCard">Live</div>
+        </a>
+
+        <a href="shared-plans.html" class="glass-card feature-card">
+          <div class="icon-chip">⟡</div>
+          <h3>Active Plans</h3>
+          <p>View and manage your running shared mining plans and entries.</p>
+          <div class="big-value text-success" id="summaryPlans">0</div>
+        </a>
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>Active Mining Assets</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="machine-table">
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Type</th>
+                <th>Hashrate / Performance</th>
+                <th>24h Profit</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="activeAssetsTable">
+              <tr>
+                <td colspan="5" class="text-muted center">Loading assets...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Portfolio Summary</h3>
+          <p>
+            New account starts with zero balance, zero machine and zero active plan.
+            Deposit funds first, then purchase a machine or activate a plan to see live data here.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Next Action</h3>
+          <p>
+            Use Deposit to add balance, then go to Machines or Shared Plans to activate
+            your mining assets. After activation, dashboard data updates automatically.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium mining dashboard with portfolio, balance and performance visibility.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const historyCount = document.getElementById("historyCount");
+      const historyCountCard = document.getElementById("historyCountCard");
+      if (historyCount && historyCountCard) {
+        setTimeout(function () {
+          historyCountCard.textContent = historyCount.textContent;
+        }, 50);
+      }
+    });
+  </script>
+</body>
+</html>

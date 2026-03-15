@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shared Plans | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html" class="active">Shared Plans</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="support.html">Support</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="deposit.html" class="btn btn-primary">Fund Wallet</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>Shared Plans</h1>
+        <p>
+          Activate premium mining exposure without direct hardware purchase through structured shared plans.
+        </p>
+      </div>
+
+      <div class="balance-strip">
+        <div class="balance-card">
+          <span>Available Balance</span>
+          <strong id="plansBalance">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Active Plans</span>
+          <strong id="plansCount">00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Daily Plan Profit</span>
+          <strong id="plansDailyProfit">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total Plan Value</span>
+          <strong id="plansTotalValue">$0.00</strong>
+        </div>
+      </div>
+
+      <div class="premium-grid three">
+
+        <div class="glass-card plan-card">
+          <div class="plan-top">
+            <span class="tag tag-soft">Shared Contract</span>
+            <div class="plan-price">$100+</div>
+          </div>
+
+          <h3>Shared Plan · 3 Months</h3>
+          <p class="plan-text">
+            Fixed short-term mining participation with maturity-based capital release.
+          </p>
+
+          <div class="plan-highlight">Estimated 24h Profit: $1.70</div>
+
+          <div class="detail-list">
+            <div><span>Duration</span><strong>3 Months</strong></div>
+            <div><span>Capital Type</span><strong>Shared Entry</strong></div>
+            <div><span>Exit Rule</span><strong>No profit on early exit</strong></div>
+            <div><span>Best For</span><strong>Short exposure</strong></div>
+          </div>
+
+          <button class="btn btn-primary full"
+            onclick="selectPlan('Shared Plan - 3 Months', 100, '3 Month Contract', 'Shared contract capital with early-exit profit restriction', 1.7)">
+            Join This Plan
+          </button>
+        </div>
+
+        <div class="glass-card plan-card featured-card">
+          <div class="plan-top">
+            <span class="tag tag-gold">Popular Shared</span>
+            <div class="plan-price">$200+</div>
+          </div>
+
+          <h3>Shared Plan · 6 Months</h3>
+          <p class="plan-text">
+            Longer premium shared contract designed for more stable daily mining participation.
+          </p>
+
+          <div class="plan-highlight">Estimated 24h Profit: $3.90</div>
+
+          <div class="detail-list">
+            <div><span>Duration</span><strong>6 Months</strong></div>
+            <div><span>Capital Type</span><strong>Shared Entry</strong></div>
+            <div><span>Exit Rule</span><strong>No profit on early exit</strong></div>
+            <div><span>Best For</span><strong>Stable exposure</strong></div>
+          </div>
+
+          <button class="btn btn-primary full"
+            onclick="selectPlan('Shared Plan - 6 Months', 200, '6 Month Contract', 'Shared contract capital with early-exit profit restriction', 3.9)">
+            Join This Plan
+          </button>
+        </div>
+
+        <div class="glass-card plan-card">
+          <div class="plan-top">
+            <span class="tag tag-blue">Flexible Shared</span>
+            <div class="plan-price">$150+</div>
+          </div>
+
+          <h3>Flexible Shared Plan</h3>
+          <p class="plan-text">
+            More liquid premium entry product with anytime withdrawal and 2% daily company charge.
+          </p>
+
+          <div class="plan-highlight">Estimated 24h Profit: $2.20</div>
+
+          <div class="detail-list">
+            <div><span>Withdrawal</span><strong>Anytime</strong></div>
+            <div><span>Charge</span><strong>2% Daily</strong></div>
+            <div><span>Capital Type</span><strong>Flexible Entry</strong></div>
+            <div><span>Best For</span><strong>Higher liquidity</strong></div>
+          </div>
+
+          <button class="btn btn-primary full"
+            onclick="selectPlan('Flexible Shared Plan', 150, 'Anytime Withdrawal', 'Flexible shared capital with 2% daily company charge', 2.2)">
+            Join This Plan
+          </button>
+        </div>
+
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>My Active Plans</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="machine-table">
+            <thead>
+              <tr>
+                <th>Plan</th>
+                <th>Duration</th>
+                <th>Entry Price</th>
+                <th>24h Profit</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="activePlansTable">
+              <tr>
+                <td colspan="5" class="text-muted center">No active plan yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Activation Logic</h3>
+          <p>
+            If your balance is enough, plan activation completes instantly and updates dashboard,
+            mining history and account portfolio.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Funding Reminder</h3>
+          <p>
+            New account starts from zero. Deposit funds first, then activate one or multiple shared plans from this page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium shared capital access with elegant contract structures.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatMoney(amount) {
+      const num = Number(amount || 0);
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = JSON.parse(localStorage.getItem("wm_registered_user") || "null");
+      if (!user) return;
+
+      const plans = Array.isArray(user.activePlans) ? user.activePlans : [];
+      const balance = Number(user.balance || 0);
+      const dailyProfit = plans.reduce(function (sum, item) {
+        return sum + Number(item.dailyProfit || 0);
+      }, 0);
+      const totalValue = plans.reduce(function (sum, item) {
+        return sum + Number(item.price || 0);
+      }, 0);
+
+      const balanceEl = document.getElementById("plansBalance");
+      const countEl = document.getElementById("plansCount");
+      const profitEl = document.getElementById("plansDailyProfit");
+      const valueEl = document.getElementById("plansTotalValue");
+      const tableEl = document.getElementById("activePlansTable");
+
+      if (balanceEl) balanceEl.textContent = formatMoney(balance);
+      if (countEl) countEl.textContent = String(plans.length).padStart(2, "0");
+      if (profitEl) profitEl.textContent = formatMoney(dailyProfit);
+      if (valueEl) valueEl.textContent = formatMoney(totalValue);
+
+      if (tableEl) {
+        if (!plans.length) {
+          tableEl.innerHTML = `
+            <tr>
+              <td colspan="5" class="text-muted center">No active plan yet.</td>
+            </tr>
+          `;
+        } else {
+          tableEl.innerHTML = plans.map(function (item) {
+            return `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.duration || "-"}</td>
+                <td>${formatMoney(item.price)}</td>
+                <td>${formatMoney(item.dailyProfit)}</td>
+                <td class="status-online">${item.status || "Running"}</td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deposit | WealthMine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">W</div>
+        <div>Wealth<span>Mine</span></div>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="machines.html">Machines</a>
+        <a href="shared-plans.html">Shared Plans</a>
+        <a href="mining-history.html">Mining History</a>
+        <a href="deposit.html" class="active">Deposit</a>
+        <a href="withdraw.html">Withdraw</a>
+        <a href="my-profile.html">Profile</a>
+        <a href="support.html">Support</a>
+        <a href="#" data-logout>Logout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
+      </div>
+
+      <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-banner">
+        <h1>Deposit Funds</h1>
+        <p>
+          Add capital to your WealthMine balance for machine purchases,
+          shared plan activation and portfolio growth.
+        </p>
+      </div>
+
+      <div class="balance-strip">
+        <div class="balance-card">
+          <span>Wallet Balance</span>
+          <strong id="depositWalletBalance">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Total Deposited</span>
+          <strong id="depositTotalDeposited">$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>Pending Deposit</span>
+          <strong>$0.00</strong>
+        </div>
+        <div class="balance-card">
+          <span>24h Profit Added</span>
+          <strong id="depositProfitAdded">$0.00</strong>
+        </div>
+      </div>
+
+      <div class="finance-grid">
+        <div class="finance-card">
+          <h3>Make a Deposit</h3>
+
+          <form id="depositForm">
+            <div class="form-group">
+              <label for="depositMethod">Select Method</label>
+              <select id="depositMethod" required>
+                <option>USDT (TRC20)</option>
+                <option>Bitcoin (BTC)</option>
+                <option>Ethereum (ETH)</option>
+                <option>Bank Transfer</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="depositAmount">Deposit Amount</label>
+              <input type="number" id="depositAmount" placeholder="Enter deposit amount" min="1" required />
+            </div>
+
+            <div class="form-group">
+              <label for="depositReference">Reference / Wallet Source</label>
+              <input
+                type="text"
+                id="depositReference"
+                placeholder="Paste source wallet or transaction reference"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="depositProof">Payment Proof</label>
+              <input type="file" id="depositProof" />
+            </div>
+
+            <button type="submit" class="btn btn-primary full">Submit Deposit Request</button>
+          </form>
+        </div>
+
+        <div class="finance-card">
+          <h3>Funding Summary</h3>
+
+          <div class="summary-line">
+            <span>Minimum Deposit</span>
+            <strong>$10</strong>
+          </div>
+          <div class="summary-line">
+            <span>Preferred Rail</span>
+            <strong>USDT · TRC20</strong>
+          </div>
+          <div class="summary-line">
+            <span>Processing Window</span>
+            <strong>Instant (Demo Logic)</strong>
+          </div>
+          <div class="summary-line">
+            <span>Verification Layer</span>
+            <strong class="text-success">Enabled</strong>
+          </div>
+          <div class="summary-line">
+            <span>Deposit State</span>
+            <strong class="text-success">Receiving</strong>
+          </div>
+
+          <div class="wallet-box">
+            <strong style="display:block;margin-bottom:8px;">Official Deposit Wallet</strong>
+            <div class="wallet-address">TRX-8F2Q-4AK9-WM91-DEMO-ADDR-001</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Capital Utility</h3>
+          <p>
+            Deposited balance can be used for direct machine purchases,
+            shared mining plans and future account actions.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Live Balance Flow</h3>
+          <p>
+            After successful deposit, your wallet balance updates automatically
+            and becomes available on the dashboard and private account area.
+          </p>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>Recent Deposits</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="machine-table">
+            <thead>
+              <tr>
+                <th>Txn ID</th>
+                <th>Method</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="depositHistoryTable">
+              <tr>
+                <td colspan="5" class="text-muted center">No deposits yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>WealthMine</strong>
+        <p>Premium funding layer for ownership and shared mining capital.</p>
+      </div>
+      <div>© 2026 WealthMine. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatMoney(amount) {
+      const num = Number(amount || 0);
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = JSON.parse(localStorage.getItem("wm_registered_user") || "null");
+      if (!user) return;
+
+      const walletBalance = document.getElementById("depositWalletBalance");
+      const totalDeposited = document.getElementById("depositTotalDeposited");
+      const profitAdded = document.getElementById("depositProfitAdded");
+      const historyTable = document.getElementById("depositHistoryTable");
+
+      if (walletBalance) walletBalance.textContent = formatMoney(user.balance || 0);
+      if (totalDeposited) totalDeposited.textContent = formatMoney(user.totalDeposited || 0);
+      if (profitAdded) profitAdded.textContent = formatMoney(user.miningProfit || 0);
+
+      if (historyTable) {
+        const history = Array.isArray(user.depositHistory) ? user.depositHistory : [];
+
+        if (!history.length) {
+          historyTable.innerHTML = `
+            <tr>
+              <td colspan="5" class="text-muted center">No deposits yet.</td>
+            </tr>
+          `;
+        } else {
+          historyTable.innerHTML = history.map(function (item) {
+            return `
+              <tr>
+                <td>${item.txnId}</td>
+                <td>${item.method}</td>
+                <td>${formatMoney(item.amount)}</td>
+                <td>${item.date}</td>
+                <td class="status-online">${item.status}</td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    });
+  </script>
+</body>
+</html>
